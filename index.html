@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romper el Silencio - Eunoia</title>
+    <meta name="description" content="Sitio de apoyo para personas que enfrentan violencia en Chihuahua. Evaluación de bienestar personal y recursos de ayuda.">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
+    <!-- Meta tags para SEO -->
+    <meta property="og:title" content="Romper el Silencio - Eunoia">
+    <meta property="og:description" content="No estás sola, solo o sole. Encuentra ayuda y apoyo en Chihuahua.">
+    <meta property="og:type" content="website">
+    <meta name="keywords" content="violencia, ayuda, Chihuahua, apoyo psicológico, refugios, líneas de ayuda">
+    
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Quick Exit -->
+    <a id="quick-exit" href="https://www.google.com" target="_blank">
+        🚨 Salida Rápida
+    </a>
+
+    <!-- Emergency Bar -->
+    <div class="emergency-bar">
+        <div class="container">
+            <span>¿Estás en peligro inmediato? <strong>Llama al 911</strong> - Atención 24/7</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Romper el silencio es el primer paso hacia la libertad</h1>
+                <p class="hero-subtitle">
+                    No estás sola, solo o sole. En Chihuahua, hay ayuda, refugio y
+                    personas que te escuchan. La violencia no discrimina, y nuestra
+                    ayuda tampoco.
+                </p>
+                <div class="hero-badges">
+                    <div class="badge">Confidencial</div>
+                    <div class="badge">Seguro</div>
+                    <div class="badge">Anónimo</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filtros Principales -->
+    <section class="group-filter-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Encuentra ayuda específica para tu situación</h2>
+                <p>Selecciona tu perfil para ver recursos personalizados</p>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-group="women">
+                    <span>Mujeres</span>
+                </button>
+                <button class="filter-btn" data-group="men">
+                    <span>Hombres</span>
+                </button>
+                <button class="filter-btn" data-group="minors">
+                    <span>Menores de edad</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <section class="tabs-section">
+        <div class="container">
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="evaluacion">
+                        Evaluación
+                    </button>
+                    <button class="tab-btn" data-tab="lugares">
+
+                        Lugares de Apoyo
+                    </button>
+                    <button class="tab-btn" data-tab="contactos">
+                        Contactos de apoyo
+                    </button>
+                    <button class="tab-btn" data-tab="mapa">
+                        
+                        Mapa de Ayuda
+                    </button>
+                    <button class="tab-btn" data-tab="informacion">
+                        
+                        Información indispensable
+                    </button>
+                </div>
+                
+                <div class="tabs-content">
+                    <!-- Pestaña 1: Evaluación -->
+                    <div class="tab-pane active" id="evaluacion">
+                        <div class="tab-content-inner">
+                            <div class="tab-header">
+                                <h2>Evaluación de Bienestar Personal</h2>
+                                <p class="tab-description">
+                                    ¿No sabes si has sufrido de violencia? Contesta esta evaluación y te ayudamos a informarte en cualquier caso. Recuerda que tienes derecho a vivir tu vida feliz y sin violencia.
+                                </p>
+                            </div>
+                            
+                            <div class="evaluation-intro">
+                                <div class="intro-card">
+                                    <h3>📋 ¿Cómo funciona?</h3>
+                                    <ul class="feature-list">
+                                        <li>Son 10 preguntas sencillas</li>
+                                        <li>Es completamente anónima</li>
+                                        <li>Te damos recomendaciones en cualquier caso</li>
+                                        <li>Te orientamos sobre dónde acudir</li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-large start-evaluation-btn" id="start-evaluation">
+                                        Comenzar Evaluación
+                                    </button>
+                                </div>
+                                
+                                <div class="privacy-card">
+                                    <div class="privacy-icon">🔒</div>
+                                    <div>
+                                        <h4>Tu privacidad es importante</h4>
+                                        <p>Esta evaluación no guarda tus respuestas ni información personal. Todo se procesa localmente en tu dispositivo.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="evaluation-container" id="evaluation-container" style="display: none;">
+                                <div class="form-container">
+                                    <div class="evaluation-header">
+                                        <button class="back-btn" id="back-to-intro">
+                                            <span class="back-icon">←</span>
+                                            Volver
+                                        </button>
+                                        <h3>Evaluación de Bienestar</h3>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="progress-fill"></div>
+                                        </div>
+                                    </div>
+                                    <form id="evaluation-form"></form>
+                                    
+                                    <div class="btn-container">
+                                        <button type="button" class="btn btn-primary btn-large" id="evaluate-btn">
+                                            Evaluar mis respuestas
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="results" id="results"></div>
+                                    
+                                    <div class="disclaimer">
+                                        <p><strong>Nota importante:</strong> Con esta evaluacón nuestro propósito no es sustituir a un profesional. Si identificas que estás siendo víctima de violencia, busca ayuda de un profesional.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña 2: Lugares de Apoyo -->
+                    <div class="tab-pane" id="lugares">
+                        <!-- Contenido para Mujeres -->
+                        <div class="tab-content-inner group-women">
+                            <div class="tab-header">
+                                <h2> Lugares de Apoyo para Mujeres</h2>
+                                <p class="tab-description">
+                                    Centros especializados en atención a mujeres en situación de violencia en Chihuahua.
+                                </p>
+                            </div>
+                            
+                            <div class="resources-grid">
+                                <div class="resource-card featured">
+                                    <div class="card-header">
+                                        
+                                        <h3>Instituto Chihuahuense de las Mujeres (ICHMUJERES)</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="service-type">Apoyo Integral para Mujeres</p>
+                                        <div class="contact-info">
+                                            <div class="contact-item">
+                                                <span class="contact-label">Teléfono:</span>
+                                                <span class="contact-value">614 429 3505 Ext. 15305</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label">Dirección:</span>
+                                                <span class="contact-value">Av. Prol. Teófilo Borunda 2800-A, Col. Cuauhtémoc, Chihuahua</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label">Horario:</span>
+                                                <span class="contact-value">Lunes a Viernes 8:00 AM - 6:00 PM</span>
+                                            </div>
+                                        </div>
+                                        <div class="services-list">
+                                            <span class="service-tag">Apoyo Psicológico</span>
+                                            <span class="service-tag">Asesoría Legal</span>
+                                            <span class="service-tag">Refugio</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="btn btn-primary" onclick="callNumber('6144293505')">
+                                            Llamar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="resource-card">
+                                    <div class="card-header">
+                                        
+                                        <h3>Fiscalía Especializada en Atención a Mujeres</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="service-type">Atención Legal Especializada</p>
+                                        <div class="contact-info">
+                                            <div class="contact-item">
+                                                <span class="contact-label">Teléfono:</span>
+                                                <span class="contact-value">(614) 429-33-00 Ext. 10703</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label">Dirección:</span>
+                                                <span class="contact-value">Calle Victoria 123, Centro, Chihuahua</span>
+                                            </div>
+                                        </div>
+                                        <div class="services-list">
+                                            <span class="service-tag">Denuncias</span>
+                                            <span class="service-tag">Órdenes de Protección</span>
+                                            <span class="service-tag">Asesoría Legal</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="btn btn-primary" onclick="callNumber('6144293300')">
+                                            Llamar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="resource-card">
+                                    <div class="card-header">
+                                        
+                                        <h3>CAVIM</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="service-type">Centro de Atención a la Violencia Contra las Mujeres</p>
+                                        <div class="contact-info">
+                                            <div class="contact-item">
+                                                <span class="contact-label">Teléfono:</span>
+                                                <span class="contact-value">614 410 9399</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label">Dirección:</span>
+                                                <span class="contact-value">Dirección confidencial por seguridad</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label">Horario:</span>
+                                                <span class="contact-value">Lunes a Viernes 9:00AM - 7:30PM</span>
+                                            </div>
+                                        </div>
+                                        <div class="services-list">
+                                            <span class="service-tag">Seguro</span>
+                                            <span class="service-tag">Confidencial</span>
+                                            <span class="service-tag">Apoyo Integral</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="btn btn-primary" onclick="callNumber('6144109399')">
+                                            Llamar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contenido para Hombres -->
+                        <div class="tab-content-inner group-men" style="display: none;">
+                            <div class="tab-header">
+                                <h2>Lugares de Apoyo para Hombres</h2>
+                                <p class="tab-description">
+                                    Centros de apoyo especializados para hombres en situación de violencia.
+                                </p>
+                            </div>
+                            
+                            <div class="resources-grid">
+                                <div class="resource-card featured">
+                                    <div class="card-header">
+                                        
+                                        <h3>Fiscalía General del Estado</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="service-type">Atención Legal para Hombres</p>
+                                        <div class="contact-info">
+                                            <div class="contact-item">
+                                                <span class="contact-label">Teléfono:</span>
+                                                <span class="contact-value">(614) 429-3300</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label">Dirección:</span>
+                                                <span class="contact-value">Chihuahua, Chih.</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label">Horario:</span>
+                                                <span class="contact-value">Lunes a Domingo 8:00am - 10:00pm</span>
+                                            </div>
+                                        </div>
+                                        <div class="services-list">
+                                            <span class="service-tag">Denuncias</span>
+                                            <span class="service-tag">Órdenes de Protección</span>
+                                            <span class="service-tag">Asesoría Legal</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="btn btn-primary" onclick="callNumber('6144293300')">
+                                            Llamar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="resource-card">
+                                    <div class="card-header">
+                                       
+                                        <h3>IMPASS - Instituto Municipal de Prevención y Atención a la Salud</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="service-type">Atención Médica y Psicológica</p>
+                                        <div class="contact-info">
+                                            <div class="contact-item">
+                                                <span class="contact-label">Teléfono:</span>
+                                                <span class="contact-value">614-200-4810</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label"> Dirección:</span>
+                                                <span class="contact-value">Chihuahua, Chih.</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label"> Horario:</span>
+                                                <span class="contact-value">Lunes a Viernes 8:00 AM - 8:00 PM</span>
+                                            </div>
+                                        </div>
+                                        <div class="services-list">
+                                            <span class="service-tag">Atención Psicológica</span>
+                                            <span class="service-tag">Atención Médica</span>
+                                            <span class="service-tag">Rehabilitación</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="btn btn-primary" onclick="callNumber('6142004810')">
+                                            Llamar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="resource-card">
+                                    <div class="card-header">
+                                        <h3>Comisión Estatal de los Derechos Humanos (CEDH)</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="service-type">Protección de Derechos Humanos</p>
+                                        <div class="contact-info">
+                                            <div class="contact-item">
+                                                <span class="contact-label">Teléfono:</span>
+                                                <span class="contact-value">614 201 2990</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label">Dirección:</span>
+                                                <span class="contact-value"> Av. Zarco 2427 Col. Zarco, Chihuahua, Chih. CP 31020</span>
+                                            </div>
+                                        </div>
+                                        <div class="services-list">
+                                            <span class="service-tag">Asesoría Legal</span>
+                                            <span class="service-tag">Protección Derechos</span>
+                                            <span class="service-tag">Quejas</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="btn btn-primary" onclick="callNumber('6142012990')">
+                                            Llamar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contenido para Menores -->
+                        <div class="tab-content-inner group-minors" style="display: none;">
+                            <div class="tab-header">
+                                <h2>Centros de Protección para Menores</h2>
+                                <p class="tab-description">
+                                    Espacios seguros especializados en protección infantil y adolescente en Chihuahua.
+                                </p>
+                            </div>
+                            
+                            <div class="resources-grid">
+                                <div class="resource-card featured">
+                                    <div class="card-header">
+                                       
+                                        <h3> DIF Estatal de Chihuahua</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="service-type">Protección Integral Infantil</p>
+                                        <div class="contact-info">
+                                            <div class="contact-item">
+                                                <span class="contact-label">Teléfono:</span>
+                                                <span class="contact-value">(614) 214 4000</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label">Dirección:</span>
+                                                <span class="contact-value"> 	Av. Tecnológico #2903 col. Magisterial Chihuahua, Chihuahua. C.P. 31310.</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label">Horario:</span>
+                                                <span class="contact-value">Lunes a Viernes 8:00AM - 4:00PM </span>
+                                            </div>
+                                        </div>
+                                        <div class="services-list">
+                                            <span class="service-tag">Protección Infantil</span>
+                                            <span class="service-tag">Apoyo Psicológico</span>
+                                            <span class="service-tag">Asesoría Legal</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="btn btn-primary" onclick="callNumber('6142144000')">
+                                            Llamar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="resource-card">
+                                    <div class="card-header">
+                                       
+                                        <h3>Guardianna</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="service-type">Atención a Violencia Sexual Infantil</p>
+                                        <div class="contact-info">
+                                            <div class="contact-item">
+                                                <span class="contact-label">Teléfono:</span>
+                                                <span class="contact-value">614 4121017</span>
+                                            </div>
+                                            <div class="contact-item">
+                                                <span class="contact-label">Dirección:</span>
+                                                <span class="contact-value">Calle Fernando de Borja, N° 316. Colonia San Felipe, Chihuahua</span>
+                                            </div>
+                                        </div>
+                                        <div class="services-list">
+                                            <span class="service-tag">Atención Especializada</span>
+                                            <span class="service-tag">Apoyo Psicológico</span>
+                                            <span class="service-tag">Protección</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-actions">
+                                        <button class="btn btn-primary" onclick="callNumber('6144121017')">
+                                            Llamar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña 3: Contactos -->
+                    <div class="tab-pane" id="contactos">
+                        <!-- Contenido para Mujeres -->
+                        <div class="tab-content-inner group-women">
+                            <div class="tab-header">
+                                <h2>Contactos de Emergencia para Mujeres</h2>
+                                <p class="tab-description">
+                                    Líneas de ayuda especializadas disponibles las 24 horas para mujeres.
+                                </p>
+                            </div>
+                            
+                            <div class="contacts-grid">
+                                <div class="contact-card emergency">
+                                   
+                                    <h3>Emergencias</h3>
+                                    <p class="contact-number emergency-number">911</p>
+                                    <p class="contact-description">Atención inmediata las 24 horas para todas las personas</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Policía</span>
+                                        <span class="service-badge">Ambulancia</span>
+                                        <span class="service-badge">Bomberos</span>
+                                    </div>
+                                    <button class="btn btn-emergency" onclick="callNumber('911')">
+                                         Llamar Ahora
+                                    </button>
+                                </div>
+
+                                <div class="contact-card">
+                                    
+                                    <h3>Línea de las Mujeres</h3>
+                                    <p class="contact-number">079</p>
+                                    <p class="contact-description">Atención especializada para mujeres que sufren de violencia</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Orientación</span>
+                                        <span class="service-badge">Apoyo</span>
+                                        <span class="service-badge">Asesoría</span>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="callNumber('079')">
+                                        Llamar
+                                    </button>
+                                </div>
+
+                                <div class="contact-card">
+                                   
+                                    <h3>Línea Morada</h3>
+                                    <p class="contact-number">800 911 3232</p>
+                                    <p class="contact-description">No permitas que la violencia te silencie - Apoyo psicológico</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Psicológico</span>
+                                        <span class="service-badge">Confidencial</span>
+                                        <span class="service-badge">Gratuito</span>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="callNumber('8009113232')">
+                                        Llamar
+                                    </button>
+                                </div>
+
+                                <div class="contact-card">
+                            
+                                    <h3>CAVIM</h3>
+                                    <p class="contact-number">614 410 9399</p>
+                                    <p class="contact-description">Centro de Atención a la Violencia Contra las Mujeres</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Apoyo</span>
+                                        <span class="service-badge">Seguro</span>
+                                        <span class="service-badge">Confidencial</span>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="callNumber('6144109399')">
+                                         Llamar
+                                    </button>
+                                </div>
+                                <div class="contact-card">
+                                 
+                                    <h3>Denuncia Anónima</h3>
+                                    <p class="contact-number">089</p>
+                                    <p class="contact-description">Denuncia anónima</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Denuncia</span>
+                                        <span class="service-badge">Ayuda</span>
+                                        <span class="service-badge">24/7</span>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="callNumber('089')">
+                                         Llamar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contenido para Hombres -->
+                        <div class="tab-content-inner group-men" style="display: none;">
+                            <div class="tab-header">
+                                <h2>Contactos de Emergencia para Hombres</h2>
+                                <p class="tab-description">
+                                    Líneas de ayuda especializadas disponibles para hombres.
+                                </p>
+                            </div>
+                            
+                            <div class="contacts-grid">
+                                <div class="contact-card emergency">
+                            
+                                    <h3>Emergencias</h3>
+                                    <p class="contact-number emergency-number">911</p>
+                                    <p class="contact-description">Atención inmediata las 24 horas</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Policía</span>
+                                        <span class="service-badge">Ambulancia</span>
+                                        <span class="service-badge">Bomberos</span>
+                                    </div>
+                                    <button class="btn btn-emergency" onclick="callNumber('911')">
+                                        Llamar Ahora
+                                    </button>
+                                </div>
+
+                                <div class="contact-card">
+                                 
+                                    <h3>Línea de la Vida</h3>
+                                    <p class="contact-number">800-911-2000</p>
+                                    <p class="contact-description">Orientación sobre violencia de género, adicciones y salud mental</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Psicológico</span>
+                                        <span class="service-badge">Orientación</span>
+                                        <span class="service-badge">24/7</span>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="callNumber('8009112000')">
+                                         Llamar
+                                    </button>
+                                </div>
+
+                                 <div class="contact-card">
+                                 
+                                    <h3>Denuncia Anónima</h3>
+                                    <p class="contact-number">089</p>
+                                    <p class="contact-description">Denuncia anónima</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Denuncia</span>
+                                        <span class="service-badge">Ayuda</span>
+                                        <span class="service-badge">24/7</span>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="callNumber('089')">
+                                         Llamar
+                                    </button>
+                                </div>
+
+                                <div class="contact-card">
+                            
+                                    <h3>Fiscalía General</h3>
+                                    <p class="contact-number">614 429 3300</p>
+                                    <p class="contact-description">Atención legal y denuncias para hombres</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Legal</span>
+                                        <span class="service-badge">Denuncias</span>
+                                        <span class="service-badge">Protección</span>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="callNumber('6144293300')">
+                                        Llamar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contenido para Menores -->
+                        <div class="tab-content-inner group-minors" style="display: none;">
+                            <div class="tab-header">
+                                <h2>Contactos de Emergencia para Menores</h2>
+                                <p class="tab-description">
+                                    Líneas de ayuda especializadas para niñas, niños y adolescentes.
+                                </p>
+                            </div>
+                            
+                            <div class="contacts-grid">
+                                <div class="contact-card emergency">
+                               
+                                    <h3>Emergencias</h3>
+                                    <p class="contact-number emergency-number">911</p>
+                                    <p class="contact-description">Atención inmediata las 24 horas</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Policía</span>
+                                        <span class="service-badge">Ambulancia</span>
+                                        <span class="service-badge">Bomberos</span>
+                                    </div>
+                                    <button class="btn btn-emergency" onclick="callNumber('911')">
+                                        Llamar Ahora
+                                    </button>
+                                </div>
+
+                                <div class="contact-card">
+                            
+                                    <h3>Línea Infantil DIF</h3>
+                                    <p class="contact-number">(614) 214 4000</p>
+                                    <p class="contact-description">Protección para niñas, niños y adolescentes</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Protección</span>
+                                        <span class="service-badge">Psicológico</span>
+                                        <span class="service-badge">24/7</span>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="callNumber('6142144000')">
+                                        Llamar
+                                    </button>
+                                </div>
+
+                                <div class="contact-card">
+                                  
+                                    <h3>Guardianna</h3>
+                                    <p class="contact-number">614 4121017</p>
+                                    <p class="contact-description">Centro de atención a la violencia sexual infantil</p>
+                                    <div class="contact-services">
+                                        <span class="service-badge">Especializado</span>
+                                        <span class="service-badge">Protección</span>
+                                        <span class="service-badge">Confidencial</span>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="callNumber('6144121017')">
+                                        Llamar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña 4: Mapa -->
+                    <div class="tab-pane" id="mapa">
+                        <div class="tab-content-inner">
+                            <div class="tab-header">
+                                <h2>Mapa de Centros de Ayuda en Chihuahua</h2>
+                                <p class="tab-description">
+                                    Encuentra los centros de apoyo más cercanos a tu ubicación.
+                                </p>
+                            </div>
+                            
+                            <div class="map-container">
+                                <div class="map-placeholder">
+                                    <div class="map-loading">
+                                        <div class="loading-spinner"></div>
+                                        <p>Cargando mapa de centros de ayuda...</p>
+                                        <p class="map-note">El mapa mostrará los centros correspondientes al perfil seleccionado</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="map-legend">
+                                <div class="legend-title">Leyenda del Mapa:</div>
+                                <div class="legend-items">
+                                    <div class="legend-item">
+                                        <div class="legend-color women"></div>
+                                        <span>Centros para Mujeres</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color men"></div>
+                                        <span>Centros para Hombres</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color minors"></div>
+                                        <span>Centros para Menores</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña 5: Información -->
+                    <div class="tab-pane" id="informacion">
+                        <!-- Contenido para Mujeres -->
+                        <div class="tab-content-inner group-women">
+                            <div class="tab-header">
+                                <h2>Información Indispensable para Mujeres</h2>
+                                <p class="tab-description">
+                                    Conoce tus derechos, consejos de seguridad y recursos específicos.
+                                </p>
+                            </div>
+                            
+                            <div class="info-accordion">
+                                <div class="accordion-item open">
+                                    <button class="accordion-header">
+                                        
+                                        <span>Derechos de las Mujeres</span>
+                                        <span class="accordion-arrow">▼</span>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <h4>Derechos Específicos para Mujeres</h4>
+                                        <ul class="rights-list">
+                                            <li>Derecho a ser libre y feliz</li>
+                    <li>Derecho a vivir en familia, en paz y con bienestar.</li>
+                    <li>Derecho a la educación.</li>
+                    <li>Derecho a la salud.</li>
+                    <li>Derecho a la vivienda.</li>
+                    <li>Derechos comunitarios.</li>
+                    <li>Derecho a una identidad y a tener autonomía.</li>
+                    <li>Derecho a la cultura.</li>
+                    <li>Derecho a la libre expresión y al libre tránsito.</li>
+                    <li>Derecho y acceso a la justicia.</li>
+                    <li>Derechos digitales.</li>
+                    <li>Derecho a una vida libre de violencia.</li>
+                                        </ul>
+                                        
+                                        <h4>Tipos de Violencia Reconocidos</h4>
+                                        <div class="violence-types">
+                                            <div class="violence-type">
+                                                <h5>Psicológica</h5>
+                                                <p>Amenazas, humillaciones, control, aislamiento</p>
+                                            </div>
+                                            <div class="violence-type">
+                                                <h5> Física</h5>
+                                                <p>Golpes, empujones, lesiones, encierro</p>
+                                            </div>
+                                            <div class="violence-type">
+                                                <h5>Económica</h5>
+                                                <p>Control del dinero, prohibición de trabajar</p>
+                                            </div>
+                                            <div class="violence-type">
+                                                <h5>Digital</h5>
+                                                <p>Acoso por redes sociales, control de dispositivos</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <button class="accordion-header">
+                                        <span>Consejos de Seguridad</span>
+                                        <span class="accordion-arrow">▼</span>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <div class="safety-tips-grid">
+                                            <div class="safety-tip">
+                                                <h5>En Casa</h5>
+                                                <ul>
+                                                    <li>Ten un plan de salida practicado</li>
+                                                    <li>Guarda documentos importantes en lugar seguro</li>
+                                                    <li>Identifica vecinos de confianza</li>
+                                                    <li>Conoce las rutas de escape</li>
+                                                </ul>
+                                            </div>
+                                            <div class="safety-tip">
+                                                <h5>En Línea</h5>
+                                                <ul>
+                                                    <li>Usa navegación privada</li>
+                                                    <li>Borra el historial después de visitarnos</li>
+                                                    <li>No guardes contraseñas automáticamente</li>
+                                                    <li>Usa el botón "Salida Rápida"</li>
+                                                </ul>
+                                            </div>
+                                            <div class="safety-tip">
+                                                <h5>En Emergencia</h5>
+                                                <ul>
+                                                    <li>Llama al 911 inmediatamente</li>
+                                                    <li>Ve a un lugar público bien iluminado</li>
+                                                    <li>Busca refugio en comercios abiertos</li>
+                                                    <li>No te detengas, busca ayuda profesional</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contenido para Hombres -->
+                        <div class="tab-content-inner group-men" style="display: none;">
+                            <div class="tab-header">
+                                <h2> Información Indispensable para Hombres</h2>
+                                <p class="tab-description">
+                                    Conoce tus derechos, consejos de seguridad y recursos específicos.
+                                </p>
+                            </div>
+                            
+                            <div class="info-accordion">
+                                <div class="accordion-item open">
+                                    <button class="accordion-header">
+                                        
+                                        <span>Derechos de los Hombres</span>
+                                        <span class="accordion-arrow">▼</span>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <h4>Derechos Específicos para Hombres</h4>
+                                        <ul class="rights-list">
+                                            <li> Derecho a denunciar cualquier tipo de violencia</li>
+                                            <li>Derecho a recibir apoyo psicológico especializado</li>
+                                            <li> Derecho a la custodia de hijos en igualdad de condiciones</li>
+                                            <li>Derecho a protección legal sin discriminación</li>
+                                            <li> Derecho a ser escuchado y creído</li>
+                                            <li> Derecho a acceder a refugios y apoyo</li>
+                                            <li>Derecho a la confidencialidad</li>
+                                        </ul>
+                                        
+                                        <h4>¿Cómo Denunciar?</h4>
+                                        <ol class="steps-list">
+                                            <li><strong>Acude a la Fiscalía General del Estado</strong> - No necesitas abogado</li>
+                                            <li><strong>Pide una orden de protección</strong> - Es inmediata</li>
+                                            <li><strong>Solicita acompañamiento</strong> - Instituciones pueden ir contigo</li>
+                                            <li><strong>Guarda evidencia</strong> - Mensajes, fotos, testimonios</li>
+                                            <li><strong>Conoce tu caso</strong> - Pide número de carpeta de investigación</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contenido para Menores -->
+                        <div class="tab-content-inner group-minors" style="display: none;">
+                            <div class="tab-header">
+                                <h2>Información Indispensable para Menores</h2>
+                                <p class="tab-description">
+                                    Conoce los derechos de las niñas, niños y adolescentes.
+                                </p>
+                            </div>
+                            
+                            <div class="info-accordion">
+                                <div class="accordion-item open">
+                                    <button class="accordion-header">
+                                        <span>Derechos de Niñas, Niños y Adolescentes</span>
+                                        n>
+                                    </button>
+                                    <div class="accordion-content">
+                                        <h4>Derechos Fundamentales</h4>
+                                        <ul class="rights-list">
+                                           <li>Derecho a la vida, a la supervivencia y al desarrollo</li>
+                    <li>Derecho de prioridad</li>
+                    <li>Derecho a la identidad</li>
+                    <li>Derecho a vivir en familia</li>
+                    <li>Derecho a la igualdad sustantiva</li>
+                    <li>Derecho a no ser discriminado</li>
+                    <li>Derecho a la educación y recreación</li>
+                    <li>Derecho a vivir en condiciones de bienestar y a un sano desarrollo integral</li>
+                    <li>Derecho a una vida libre de violencia y a la integridad personal</li>
+                    <li>Derecho a la protección de la salud y a la Seguridad Social</li>
+                    <li>Derecho al descanso y al esparcimiento</li>
+                    <li>Derecho a vivir en un ambiente seguro</li>
+                    <li>Derecho a la libertad de convicciones éticas, pensamiento, conciencia, religión y cultura</li>
+                    <li>Derecho a la libertad de expresión y de acceso a la información</li>
+                    <li>Derecho de participación y opinión</li>
+                    <li>Derecho de asociación y reunión</li>
+                    <li>Derecho a la intimidad</li>
+                    <li>Derecho a la seguridad jurídica y al debido procesoa</li>
+                    <li> Derechos de niñas, niños y adolescentes migrantes</li>
+                    <li>Derecho a la inclusión de niñas, niños de adolescentes con discapacidad</li>
+                    <li>Derecho a la educación</li>
+                    <li>Derecho de acceso a las tecnologías de información y comunicación, así como a los servicios de radio, difusión y telecomunicaciones </li>
+                                        </ul>
+                                        
+                                        <h4>Señales de Alerta en Menores</h4>
+                                        <div class="alert-signs">
+                                            <div class="alert-sign">
+                                                <h5>Cambios de Comportamiento</h5>
+                                                <p>Cambios repentinos de actitud, como agresividad repentina, demasiada tristeza, etc.</p>
+                                            </div>
+                                            <div class="alert-sign">
+                                                <h5> Problemas de Sueño</h5>
+                                                <p>Pesadillas, insomnio, miedo a dormir solo</p>
+                                            </div>
+                                            <div class="alert-sign">
+                                                <h5>Cambios Escolares</h5>
+                                                <p>Bajo rendimiento, faltas frecuentes, miedo a la escuela</p>
+                                            </div>
+                                            <div class="alert-sign">
+                                                <h5>Señales Físicas</h5>
+                                                <p>Moretones, lesiones, conductas diferentes</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Sobre Nosotros</h2>
+                    <p>
+                        Somos un grupo de estudiantes del <strong>Centro de Bachillerato Tecnológico Industrial y de Servicios No. 122</strong>. 
+                        Decidimos crear este espacio para ofrecer información y apoyo a <strong>todas las personas</strong> de Chihuahua 
+                        que viven algún tipo de violencia.
+                    </p>
+                    <p>
+                        Creemos que la violencia puede afectar a cualquier persona, sin importar género, edad o situación. 
+                        Queremos que sepan que <strong>no están solas, solos o soles</strong>, y que siempre hay una salida.
+                    </p>
+                </div>
+                <div class="about-features">
+                    <div class="feature-card">
+            
+                        <h4>Confidencial</h4>
+                        <p>Tu información está segura con nosotros</p>
+                    </div>
+                    <div class="feature-card">
+                     
+                        <h4>Propósito</h4>
+                        <p>Nuestro propósito es que las personas pidan ayuda, y que con el paso del tiempo se acabe el silencio</p>
+                    </div>
+                    <div class="feature-card">
+   
+                        <h4>Inclusivo</h4>
+                        <p>Ayuda para todas las personas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Warning -->
+    <div class="safety-warning">
+        <div class="container">
+            <div class="warning-content">
+
+                <div class="warning-text">
+                    <h4>Recuerda: Tu seguridad es lo primero</h4>
+                    <p>
+                        Tu actividad en internet puede ser vista por otros. Para mayor seguridad, usa el modo de navegación 
+                        privada y borra el historial después de tu visita. Si estás en peligro inmediato, cierra esta página 
+                        y llama al 911.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <h3>Romper el Silencio - Eunoia</h3>
+                        <p>Centro de Bachillerato Tecnológico Industrial y de Servicios No. 122</p>
+                    </div>
+                    <div class="footer-contact">
+                        <p><strong>Contacto del proyecto:</strong> proyectocbtis122@email.com</p>
+                    </div>
+                </div>
+                <div class="footer-warning">
+                    <p>
+                        <strong>⚠️ Importante:</strong> Si estás en peligro, cierra esta página inmediatamente y busca ayuda segura.
+                        La violencia afecta a personas de todos los géneros y edades.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <a href="#privacy">Política de Privacidad</a>
+                    <span>•</span>
+                    <a href="#terms">Términos de Uso</a>
+                    <span>•</span>
+                    <a href="#security">Seguridad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    <script src="script.js"></script>
+</body>
+</html>
